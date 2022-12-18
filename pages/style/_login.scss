@@ -1,0 +1,16 @@
+@use 'variables';
+
+.login {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: variables.$spotify-black;
+    color: white;
+    & a {
+        margin: 2rem 0;
+    }
+}

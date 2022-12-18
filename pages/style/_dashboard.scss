@@ -1,0 +1,58 @@
+@use 'variables';
+
+// ------- DASHBOARD MAIN CONTAINER
+.dashboard {
+    width: 100%;
+    height: 100vh;
+    padding: 0 5%;
+
+    & nav {
+        width: 100%;
+        height: 10%;
+    }
+}
+// ------- END OF DASHBOARD
+
+// ------ NAVIGATION 
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // &__genres {
+
+    // }
+    // &__search {
+
+    // }
+}
+// ------ END OF NAVIGATION
+
+// SUCCESS SECTION
+.success {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & .buttons {
+        margin-top: 2rem;
+        display: flex;
+        gap: 2rem;
+    }
+}
+// ------ End of SUCCESS PAGE
+
+// New Releases Section
+.new-releases {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 15px;
+
+    &__album-card {
+        padding: 5px 5px;
+        -webkit-box-shadow: 0px 0px 4px 1px rgba(255,255,255,0.37); 
+        box-shadow: 0px 0px 4px 1px rgba(255,255,255,0.37);
+        background-color: aliceblue;
+    }
+}
