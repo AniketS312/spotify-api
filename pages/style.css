@@ -103,16 +103,49 @@ a:active {
 }
 
 .new-releases {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   gap: 15px;
+  padding-bottom: 4rem;
 }
 .new-releases__album-card {
-  padding: 5px 5px;
+  padding: 5px 5px 10px 5px;
   -webkit-box-shadow: 0px 0px 4px 1px rgba(255, 255, 255, 0.37);
   box-shadow: 0px 0px 4px 1px rgba(255, 255, 255, 0.37);
   background-color: aliceblue;
+  color: #191414;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.new-releases__album-card--description {
+  display: flex;
+  flex-direction: column;
+}
+.new-releases .album-info,
+.new-releases .album-meta {
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.new-releases .album-info {
+  flex-direction: column;
+  padding-top: 1.5rem;
+}
+.new-releases .album-info h2 {
+  font-size: 2.5rem;
+}
+.new-releases .album-info span {
+  font-size: 1.5rem;
+}
+.new-releases .album-meta {
+  margin: 2rem 0;
+}
+.new-releases .album-meta time {
+  font-size: 1.5rem;
 }
 
 .error {

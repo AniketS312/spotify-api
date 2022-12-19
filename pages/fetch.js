@@ -9,7 +9,17 @@ const getNewReleases = async (token) => {
         }
         });
     const data = await result.json();
-    newReleases =  data.albums;
-    newReleasesLimit+= data.albums.limit
+    newReleases = await data.albums;
+    newReleasesLimit += await data.albums.limit
     return data;
 }
+
+const fetchArtistGenre = async (token, artistId) => {
+    const result = await fetch(`${spotifyURL}/artists/${artistId}`, {
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + token }
+    });
+    const data = await result.json();
+    const genre = await data.genres
+    return genre;
+};
