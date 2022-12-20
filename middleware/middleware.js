@@ -28,7 +28,7 @@ function getLoginPage(req, res)  {
 // Redirect from login page to Spotify
 function spotifyRedirect (req, res) {
     const state = randomstring.generate(16);
-    const scope = 'user-read-private user-read-email';
+    const scope = 'user-read-private user-read-email user-library-modify user-library-read';
   
     res.redirect('https://accounts.spotify.com/authorize?' +
       querystring.stringify({

@@ -31,7 +31,7 @@ p {
   font-size: 1.6rem;
 }
 
-a {
+.button {
   text-decoration: none;
   cursor: pointer;
   border: none;
@@ -41,6 +41,14 @@ a {
   border-radius: 25px;
   font-size: 1.5rem;
   color: #191414;
+}
+
+.image-button {
+  width: auto;
+  height: auto;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
 }
 
 a:focus {
@@ -89,6 +97,12 @@ a:active {
   justify-content: space-between;
   align-items: center;
 }
+.main-nav__genres {
+  display: flex;
+  list-style: none;
+  text-decoration: none;
+  gap: 15px;
+}
 
 .success {
   display: flex;
@@ -119,6 +133,7 @@ a:active {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  overflow: hidden;
 }
 .new-releases__album-card--description {
   display: flex;

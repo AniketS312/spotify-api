@@ -1,17 +1,24 @@
 async function createCard(data) {
     // Await Genre from artist fetch as genre does not exist on new releases
     let genre = await fetchArtistGenre(spotifyToken, data.artists[0].id)
+
     // Create Main card component
     const albumCard = document.createElement('div');
     albumCard.classList.add('new-releases__album-card');
     albumCard.id = data.uri.split(':')[2]
+    
     // Create Image component
+    const imageLink = document.createElement('a')
+    imageLink.classList.add('image-button')
+    imageLink.href= data.external_urls.spotify;
+    imageLink.setAttribute('target', '_blank')
     const image = document.createElement('img')
     image.height = 250;
     image.width = 250;
     image.src= data.images[0].url
     image.alt=`${data.name}`
-    albumCard.appendChild(image);
+    imageLink.appendChild(image)
+    albumCard.appendChild(imageLink);
 
     // Crate description component
     const descriptionComponent = document.createElement('div');
@@ -38,17 +45,16 @@ async function createCard(data) {
     albumMeta.appendChild(albumTime)
 
     const toAlbum = document.createElement('a')
-    toAlbum.href= data.external_urls.spotify;
-    toAlbum.setAttribute('target', '_blank')
-    toAlbum.innerText = data.album_type === 'album' ? "To Album" : "To Single";
+    toAlbum.classList.add('button')
+    // toAlbum.href= data.external_urls.spotify;
+    // toAlbum.setAttribute('target', '_blank')
+    toAlbum.setAttribute('data-albumid', data.id)
+    toAlbum.addEventListener('click', addAlbumToLibrary)
+    toAlbum.innerText = data.album_type === 'album' ? "Add Album" : "Add Single";
     albumMeta.appendChild(toAlbum)
-
+    
     albumCard.appendChild(albumMeta);
 
     newReleasesSection.appendChild(albumCard)
 }
 
-
-// ----get album title
-//  const newTestArray =  testArray.split('').splice(0, 10).join('')
-// console.log(newTestArray+'...')

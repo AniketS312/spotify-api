@@ -38,7 +38,7 @@ p {
 
 
 // ------ Components 
-a {
+.button {
     text-decoration: none;
     cursor: pointer;
     border: none;
@@ -48,6 +48,14 @@ a {
     border-radius: 25px;
     font-size: 1.5rem;
     color: variables.$spotify-black;
+}
+
+.image-button {
+    width: auto;
+    height: auto;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
 }
 
 a:focus {
