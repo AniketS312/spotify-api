@@ -9,6 +9,7 @@ let newReleases;
 let genreSearch;
 
 // components
+const dashboardComponent = document.querySelector('.dashboard')
 const successSection = document.querySelector('.success')
 const newReleasesSection = document.querySelector('.new-releases')
 const genreComponents = document.querySelector('.genres')
@@ -27,7 +28,6 @@ newReleasesButton.forEach(e => e.addEventListener('click',(e) => {
     e.preventDefault; 
     clearNewReleasesSection()
     hideSuccess()
-    hideGenre()
     showNewReleases()
     newReleases.items.forEach((data) => createCard(data))
 })
@@ -40,9 +40,13 @@ const addAlbumToLibrary = async(element) => {
     .then(data => {
         if(data === false) {
                 confirmAddAlbum(spotifyToken, albumId)
+                createModal('Album added to your library')
+                deleterModal()
                 console.log('adding')
             } else if (data === true) {
+                createModal('Album already appears to be in your Library')
                 console.log('Already in Library')
+                deleterModal()
             }
     })
     // console.log(inLibrary)

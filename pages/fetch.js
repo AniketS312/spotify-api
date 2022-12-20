@@ -38,10 +38,9 @@ const confirmAddAlbum = async(token, albumId) => {
         method: 'PUT',
         headers: { 'Authorization': 'Bearer ' + token }
     });
-    const data = await result.json();
-    console.log(result.json())
+    const data = await result;
     console.log(data)
-    return inLibrary
+    return data
 }
 
 // Search for genres
