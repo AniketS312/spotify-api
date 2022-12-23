@@ -1,0 +1,24 @@
+@use 'variables';
+
+.select-genre {
+    font-size: 1.5rem;
+    padding: .5rem  2rem;
+    background-color: transparent;
+    color: variables.$spotify-green;
+    text-align: left;
+    border: none;
+    border-bottom: 2px;
+
+    & option {
+        font-size: inherit;
+        background: variables.$spotify-black; 
+        
+    }
+
+    &:focus {
+        outline: none;
+        outline-style: variables.$spotify-green;
+    }
+
+    
+}

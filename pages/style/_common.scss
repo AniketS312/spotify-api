@@ -42,20 +42,21 @@ p {
     text-decoration: none;
     cursor: pointer;
     border: none;
-    background-color: variables.$spotfiy-green;
+    background-color: variables.$spotify-green;
     font-size: 1rem;
-    padding: 1rem 3rem;
+    padding: .8rem 2.5rem;
     border-radius: 25px;
     font-size: 1.5rem;
     color: variables.$spotify-black;
 }
 
 .image-button {
-    width: auto;
-    height: auto;
+    width: 250px;
+    height: 250px;
     text-decoration: none;
     cursor: pointer;
     border: none;
+    overflow: hidden;
 }
 
 a:focus {

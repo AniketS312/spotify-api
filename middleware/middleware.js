@@ -64,7 +64,6 @@ function spotifyRedirect (req, res) {
       if (response.status === 200) {
         accessToken = response.data.access_token
         res.setHeader('Set-Cookie', `spotifyToken=${response.data.access_token}`)
-        console.log(accessToken)
         res.sendFile(filePathDashboard);  
       } else {
         res.send(response);

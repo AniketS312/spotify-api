@@ -11,24 +11,11 @@
     <div class="dashboard">
         <nav class="main-nav">
                 <img height="45" width="150" src="./spotify-logo.png" alt="Spotify contribution logo">
-                <ul class="main-nav__genres">
-                    <li>
-                        <a class="button" data-genre="new-releases">Get New Releases</a>
-                    </li>
-                    <li>
-                        <a class="button" data-genre="hip-hop">Rap</a>
-                    </li>
-                    <li>
-                        <a class="button" data-genre="metal">Metal</a>
-                    </li>
-                    <li>
-                        <a class="button" data-genre="indie">Indie</a>
-                    </li>
-                    <li>
-                        <a class="button" data-genre="electronic">Electronic</a>
-                    </li>
-                </ul>
-                <input class="main-nav__search" type="text" placeholder="Search..."></input>
+                <div class="main-nav__search-bar">
+                    <label for="genres">Select Genre</label>
+                    <select name="genres" id="genres" class="select-genre">
+                    </select>
+                </div>
         </nav>
         <main>
             <div class="success">
@@ -40,14 +27,13 @@
             </div>
             <div class="new-releases">
             </div>
-            <!-- <div class="modal">
-                Album already appears to be in your Library
-            </div> -->
+
         </main>
     </div>
 </body>
 <script src="./fetch.js"></script>
 <script src="./templates/CardTemplate.js"></script>
 <script src="./templates/ModalTemplate.js"></script>
+<script src="./templates/menuItems.js"></script>
 <script src="./dashboard.js"></script>
 </html>

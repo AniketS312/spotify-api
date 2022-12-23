@@ -1,5 +1,26 @@
 @use 'variables';
 
+// ------ NAVIGATION 
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // padding: 0 5%;
+    &__genres {
+        display: flex;
+        list-style: none;
+        text-decoration: none;
+        gap: 15px;
+    }
+    &__search-bar {
+        & label {
+         display: none;   
+        font-size: 1.5rem;
+        }
+    }
+}
+// ------ END OF NAVIGATION
+
 // ------- DASHBOARD MAIN CONTAINER
 .dashboard {
     width: 100%;
@@ -11,100 +32,8 @@
         width: 100%;
         height: 10vh;
     }
-
-    & .modal {
-        position: absolute;
-        top: 2%;
-        left: 50%;
-        transform-origin: center;
-        transform: translate(-50%, 0);
-        z-index: 100;
-        width: 80%;
-        height: 8%;
-        background-color: aliceblue;
-        border-radius: 5px;
-        color: variables.$spotify-black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-       
-        font-weight: 500;
-        overflow: hidden;
-        opacity: 0;
-        animation: modalAnimation;
-        animation-duration: 2s;
-        &::before {
-            content: '';
-            background-color: variables.$spotfiy-green;
-            height: 100%;
-            width: 0;
-            position: absolute;
-            top: 90%;
-            transform-origin: center;
-            animation: modalBeforeAnimation;
-            animation-duration: 1.9s;
-        }
-
-        & figcaption {
-            font-size: 1.5rem;
-        }
-    }
-
-
-
-    // Modal Animation
-    @keyframes modalAnimation {
-        0% {
-            top:2%
-        }
-        25% {
-            top:8%;
-            opacity: 100%;
-        }
-        50% {
-            top:8%;
-            opacity: 100%;
-
-        }
-        75% {
-            top:8%;
-            opacity: 100%;
-
-        }
-        100% {
-            top:2%;
-            opacity: 0;
-        }
-    }
-
-    @keyframes modalBeforeAnimation {
-        0% {
-            width: 5%;
-        }
-    
-        100% {
-            width: 100%;
-        }
-    }
 }
-
-
-
 // ------- END OF DASHBOARD
-
-// ------ NAVIGATION 
-.main-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    &__genres {
-        display: flex;
-        list-style: none;
-        text-decoration: none;
-        gap: 15px;
-    }
-}
-// ------ END OF NAVIGATION
 
 // SUCCESS SECTION
 .success {
@@ -162,6 +91,7 @@
     }
     span {
         font-size: 1.5rem;
+        text-align: center;
     }
 }
 

@@ -10,7 +10,7 @@ function createModal(data) {
 }
 
 // Deletes Modal from HTMl
-function deleterModal() {
+function deleteModal() {
     const modal = document.querySelectorAll('.modal')
     setTimeout(function() {
         modal.forEach(e => e.remove())

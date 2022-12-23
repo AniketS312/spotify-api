@@ -45,10 +45,20 @@ const confirmAddAlbum = async(token, albumId) => {
 
 // Search for genres
 const searchGenre = async(token, genre) => {
-    const result = await fetch(`${spotifyURL}/search?q=${genre}%2Ctag%3Anew&type=track%2Calbum&limit=50`, {
+    const result = await fetch(`${spotifyURL}/search?q=${genre}&type=track&limit=50`, {
         method: 'GET',
         headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await result.json();
-    return data
+    return genreSearchResults = data
+}
+
+// Internal use of getting valid genres
+const getGenres = async(token) => {
+    const result = await fetch(`${spotifyURL}/recommendations/available-genre-seeds`, {
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + token }
+    });
+    const data = await result.json();
+    return console.log(data)
 }
