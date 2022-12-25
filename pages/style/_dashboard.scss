@@ -44,6 +44,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0 3rem;
+    text-align: center;
 
     & .buttons {
         margin-top: 2rem;
@@ -106,7 +108,17 @@
 }
 }
 
+// Load More Section
+.load-more {
+    padding: 5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+
+
+// Media queries
 @media only screen and (max-width: 700px) {
     .main-nav {
         margin: 2rem 0;

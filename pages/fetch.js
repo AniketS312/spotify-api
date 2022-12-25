@@ -10,6 +10,18 @@ const getNewReleases = async (token) => {
     return data;
 }
 
+const getNewReleasesWithOffset = async (token, offset) => {
+    const result = await fetch(`${spotifyURL}/browse/new-releases?limit=50&offset=${offset}`, {
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + token },
+        });
+    const data = await result.json();
+    additionalAlbums = await data.items
+    console.log(additionalAlbums)
+    return data;
+}
+
+
 // Fetch genre by artist - done as a second part of the new releases call
 const fetchArtistGenre = async (token, artistId) => {
     const result = await fetch(`${spotifyURL}/artists/${artistId}`, {
@@ -39,19 +51,21 @@ const confirmAddAlbum = async(token, albumId) => {
         headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await result;
-    console.log(data)
     return data
 }
 
 // Search for genres
-const searchGenre = async(token, genre) => {
-    const result = await fetch(`${spotifyURL}/search?q=${genre}&type=track&limit=50`, {
+const getAlbumsByGenres = async(token, genre) => {
+    const result = await fetch(`${spotifyURL}/recommendations?limit=100&seed_genres=${genre}`, {
         method: 'GET',
         headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await result.json();
+    console.log(data)
     return genreSearchResults = data
 }
+
+
 
 // Internal use of getting valid genres
 const getGenres = async(token) => {
@@ -62,3 +76,14 @@ const getGenres = async(token) => {
     const data = await result.json();
     return console.log(data)
 }
+
+
+const getCategories = async(token) => {
+    const result = await fetch(`${spotifyURL}/browse/categories?limit=50&offset=50`, {
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + token }
+    });
+    const data = await result.json();
+    return console.log(data.categories)
+}
+

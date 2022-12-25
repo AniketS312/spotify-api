@@ -15,6 +15,7 @@ const menuItems = [
     'house',
     'indie',
     'metal',
+    // 'new-release',
     'rock',
     'techno',
     'trip-hop',
