@@ -2,7 +2,7 @@ const path = require('path');
 const randomstring = require("randomstring");
 const Buffer = require('buffer/').Buffer
 const axios = require('axios');
-// var redirect_uri = 'http://localhost:8888/callback';
+const redirect_uri = 'https://spotfiy-search.onrender.com/callback';
 
 // Setup backend local Storage
 
@@ -26,8 +26,6 @@ function getLoginPage(req, res)  {
 
 // Redirect from login page to Spotify
 function spotifyRedirect (req, res) {
-  const url = `${req.url}/callback`
-  console.log(req.host)
     const state = randomstring.generate(16);
     const scope = 'user-read-private user-read-email user-library-modify user-library-read';
   
@@ -35,7 +33,7 @@ function spotifyRedirect (req, res) {
         response_type: 'code',
         client_id: client_id,
         scope: scope,
-        redirect_uri: url,
+        redirect_uri: redirect_uri,
         state: state
     })
     res.redirect('https://accounts.spotify.com/authorize?' + usp)
@@ -46,13 +44,12 @@ function spotifyRedirect (req, res) {
  function redirectAfterAuth(req, res) {
   const code = req.query.code || null;
   const state = req.query.state || null;
-  const url = `${req.url}/callback`
 
 
   const usp = new URLSearchParams({
     grant_type: 'authorization_code',
     code: code,
-    redirect_uri: url
+    redirect_uri: redirect_uri
 })
 
   axios({
