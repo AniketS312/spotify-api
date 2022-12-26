@@ -1,6 +1,5 @@
 const path = require('path');
 const randomstring = require("randomstring");
-const querystring = require('node:querystring');
 const { Buffer } = require('node:buffer');
 const axios = require('axios');
 var redirect_uri = 'http://localhost:8888/callback';
@@ -15,9 +14,9 @@ const client_secret = process.env.CLIENT_SECRET;
 let accessToken;
 
 // Filepaths
-const filePathMain = path.join(__dirname, '../','/pages'+'/index.html');
-const filePathDashboard = path.join(__dirname, '../','/pages'+'/dashboard.html');
-const filePathError = path.join(__dirname, '../','/pages'+'/error.html');
+const filePathMain = path.join(__dirname, '../','/dist'+'/index.html');
+const filePathDashboard = path.join(__dirname, '../','/dist'+'/dashboard.html');
+const filePathError = path.join(__dirname, '../','/dist'+'/error.html');
 
 
 // Serve Log in Page
@@ -30,31 +29,32 @@ function spotifyRedirect (req, res) {
     const state = randomstring.generate(16);
     const scope = 'user-read-private user-read-email user-library-modify user-library-read';
   
-    res.redirect('https://accounts.spotify.com/authorize?' +
-      querystring.stringify({
+    const usp = new URLSearchParams({
         response_type: 'code',
         client_id: client_id,
         scope: scope,
         redirect_uri: redirect_uri,
         state: state
-      })
-    );
+    })
+    res.redirect('https://accounts.spotify.com/authorize?' + usp)
 }
+
 
 // Serve page after authorizaton. Store authorization code into a cookie for front end can access token
  function redirectAfterAuth(req, res) {
   const code = req.query.code || null;
   const state = req.query.state || null;
 
-  axios(
-    {
+  const usp = new URLSearchParams({
+    grant_type: 'authorization_code',
+    code: code,
+    redirect_uri: redirect_uri
+})
+
+  axios({
     method: 'post',
     url: 'https://accounts.spotify.com/api/token',
-    data: querystring.stringify({
-      grant_type: 'authorization_code',
-      code: code,
-      redirect_uri: redirect_uri
-    }),
+    data: usp,
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
       Authorization: `Basic ${new Buffer.from(`${client_id}:${client_secret}`).toString('base64')}`,
@@ -86,13 +86,15 @@ function spotifyRedirect (req, res) {
 function refreshToken(req, res) {
   const { refresh_token } = req.query;
 
+  const usp = new URLSearchParams({
+    grant_type: 'refresh_token',
+    refresh_token: refresh_token
+})
+
   axios({
     method: 'post',
     url: 'https://accounts.spotify.com/api/token',
-    data: querystring.stringify({
-      grant_type: 'refresh_token',
-      refresh_token: refresh_token
-    }),
+    data: usp,
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
       Authorization: `Basic ${new Buffer.from(`${client_id}:${client_secret}`).toString('base64')}`,
