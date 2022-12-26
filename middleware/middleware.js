@@ -1,6 +1,6 @@
 const path = require('path');
 const randomstring = require("randomstring");
-const { Buffer } = require('node:buffer');
+const Buffer = require('buffer/').Buffer
 const axios = require('axios');
 var redirect_uri = 'http://localhost:8888/callback';
 
