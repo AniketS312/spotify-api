@@ -2,7 +2,7 @@ const path = require('path');
 const randomstring = require("randomstring");
 const Buffer = require('buffer/').Buffer
 const axios = require('axios');
-var redirect_uri = 'http://localhost:8888/callback';
+var redirect_uri = 'https://spotfiy-search.onrender.com/callback';
 
 // Setup backend local Storage
 
