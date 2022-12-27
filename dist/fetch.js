@@ -40,7 +40,6 @@ const getAlbumsByGenres = async(token, genre) => {
         headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await result.json();
-    console.log(data)
     return genreSearchResults = data
 }
 
