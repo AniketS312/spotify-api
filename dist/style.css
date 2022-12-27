@@ -79,6 +79,7 @@ a:active {
   background-color: #191414;
   color: white;
   padding: 0 2rem;
+  overflow: hidden;
 }
 .login a {
   margin: 2rem 0;
