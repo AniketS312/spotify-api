@@ -10,7 +10,10 @@
     text-align: center;
     background-color: variables.$spotify-black;
     color: white;
+    padding:0 2rem;
+
     & a {
         margin: 2rem 0;
     }
+
 }

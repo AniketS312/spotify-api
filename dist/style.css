@@ -78,6 +78,7 @@ a:active {
   text-align: center;
   background-color: #191414;
   color: white;
+  padding: 0 2rem;
 }
 .login a {
   margin: 2rem 0;
