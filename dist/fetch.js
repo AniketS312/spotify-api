@@ -10,14 +10,14 @@ const getNewReleases = async (token) => {
     return data;
 }
 
-const getNewReleasesWithOffset = async (token, offset) => {
-    const result = await fetch(`${spotifyURL}/browse/new-releases?limit=50&offset=${offset}`, {
+// Get new releases with offset to memic load more - Can only be done once
+const getNewReleasesWithOffset = async (token, link) => {
+    const result = await fetch(`${link}`, {
         method: 'GET',
         headers: { 'Authorization': 'Bearer ' + token },
         });
     const data = await result.json();
-    additionalAlbums = await data.items
-    console.log(additionalAlbums)
+    additionalAlbums = await data.albums
     return data;
 }
 
@@ -32,6 +32,19 @@ const fetchArtistGenre = async (token, artistId) => {
     const genre = await data.genres
     return genre;
 };
+
+//  Search Albums by Genres
+const getAlbumsByGenres = async(token, genre) => {
+    const result = await fetch(`${spotifyURL}/recommendations?limit=100&seed_genres=${genre}`, {
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + token }
+    });
+    const data = await result.json();
+    console.log(data)
+    return genreSearchResults = data
+}
+
+
 
 // Check to see if album is already in your library
 const checkAlbumStatus = async(token, albumId) => {
@@ -54,16 +67,20 @@ const confirmAddAlbum = async(token, albumId) => {
     return data
 }
 
-// Search for genres
-const getAlbumsByGenres = async(token, genre) => {
-    const result = await fetch(`${spotifyURL}/recommendations?limit=100&seed_genres=${genre}`, {
+
+
+
+const getCategories = async(token) => {
+    const result = await fetch(`${spotifyURL}/browse/categories?limit=50&offset=50`, {
         method: 'GET',
         headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await result.json();
-    console.log(data)
-    return genreSearchResults = data
+    return console.log(data.categories)
 }
+
+
+
 
 
 
@@ -75,15 +92,5 @@ const getGenres = async(token) => {
     });
     const data = await result.json();
     return console.log(data)
-}
-
-
-const getCategories = async(token) => {
-    const result = await fetch(`${spotifyURL}/browse/categories?limit=50&offset=50`, {
-        method: 'GET',
-        headers: { 'Authorization': 'Bearer ' + token }
-    });
-    const data = await result.json();
-    return console.log(data.categories)
 }
 

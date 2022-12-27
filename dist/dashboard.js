@@ -9,7 +9,7 @@ let testGenre = 'electronic';
 let newReleases;
 let additionalAlbums;
 let genreSearchResults;
-let offset = 0;
+let nextloadMoreLink = '';
 
 // components
 const dashboardComponent = document.querySelector('.dashboard')
@@ -24,12 +24,12 @@ const consoleButton = document.getElementById('console')
 const loadMoreButton = document.getElementById('load-more-button')
 
 // Get inital 50 albums on load and set menu Iems
-    window.addEventListener('load', () => {
-        // Sets newReleases variable declared above
-        getNewReleases(spotifyToken)
-        addGenresToInput(menuItems)
-        hideloadMoreSection()
-    })
+window.addEventListener('load', () => {
+    // Sets newReleases variable declared above
+    getNewReleases(spotifyToken)
+    addGenresToInput(menuItems)
+    hideloadMoreSection()
+})
 
 // Search for Genres from Select Input
 inputComponent.addEventListener('change', async function(element) {
@@ -49,17 +49,17 @@ newReleasesButton.addEventListener('click',(e) => {
     hideSuccess()
     showloadMoreSection()
     showNewReleases()
-    offset = newReleases.items.length
+    nextloadMoreLink = newReleases.next
     newReleases.items.forEach((data) => createCard(data, newReleasesSection))
 });
 
-// List more New releases upon click
-loadMoreButton.addEventListener('click', (e) => {
+// Display 50 more new releases
+
+loadMoreButton.addEventListener('click', async function(e) {
     e.preventDefault;
-    getNewReleasesWithOffset(spotifyToken,offset)
-    console.log(additionalAlbums)
-    // offset+= addtionalReleases.items.length
-    // addtionalReleases.items.forEach((data) => createCard(data, newReleasesSection))
+    await getNewReleasesWithOffset(spotifyToken, nextloadMoreLink)
+    additionalAlbums.items.forEach((data) => createCard(data, newReleasesSection))
+    hideloadMoreSection()
 })
 
 // Checks to see if album is already in library and than either adds it or makes user aware that album is already in library
