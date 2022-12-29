@@ -17,28 +17,10 @@ const getNewReleasesWithOffset = async (token, link) => {
         headers: { 'Authorization': 'Bearer ' + token },
         });
     const data = await result.json();
-    additionalAlbums = await data.albums
-    console.log(data)
+    additionalAlbums = data.albums
+    nextloadMoreLink = data.albums.next
     return data;
 }
-
-
-
-
-
-// Fetch genre by artist - done as a second part of the new releases call
-const fetchArtistGenre = async (token, artistId) => {
-    const result = await fetch(`${spotifyURL}/artists/${artistId}`, {
-        method: 'GET',
-        headers: { 'Authorization': 'Bearer ' + token }
-    });
-    const data = await result.json();
-    const genre = await data.genres
-    return genre;
-};
-
-
-
 
 //  Search Albums by Genres - 
 
@@ -58,10 +40,22 @@ const getAlbumsByGenresWithOffset = async(token, link) => {
         headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await result.json();
-    console.log(data)
     additionalAlbums = data.tracks
     return nextloadMoreLink = data.tracks.next    
 }
+
+
+
+// Fetch genre by artist - done as a second part of the new releases call
+const fetchArtistGenre = async (token, artistId) => {
+    const result = await fetch(`${spotifyURL}/artists/${artistId}`, {
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + token }
+    });
+    const data = await result.json();
+    const genre = await data.genres
+    return genre;
+};
 
 
 // Check to see if album is already in your library
@@ -97,11 +91,6 @@ const getCategories = async(token) => {
     const data = await result.json();
     return console.log(data.categories)
 }
-
-
-
-
-
 
 // Internal use of getting valid genres
 const getGenres = async(token) => {

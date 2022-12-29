@@ -38,11 +38,7 @@ inputComponent.addEventListener('change', async function(element) {
     loadMoreTypeIsNewReleases = false;
     hideSuccess()
     await getAlbumsByGenres(spotifyToken, genreValue)
-    if(nextloadMoreLink != '') {
-        showloadMoreSection()
-    } else {
-        hideloadMoreSection()
-    }
+    loadMorelink()
     clearNewReleasesSection()   
     showNewReleases()     
     genreSearchResults.forEach((data) => createCard(data.album, newReleasesSection))    
@@ -53,14 +49,10 @@ newReleasesButton.addEventListener('click',(e) => {
     e.preventDefault; 
     clearNewReleasesSection()
     hideSuccess()
-    showloadMoreSection()
     nextloadMoreLink = newReleases.next
     newReleases.items.forEach((data) => createCard(data, newReleasesSection))
-    if(nextloadMoreLink != '') {
-        showloadMoreSection()
-    } else {
-        hideloadMoreSection()
-    }
+    showNewReleases()
+    loadMorelink()
 });
 
 // Display 50 more new releases
@@ -70,16 +62,13 @@ loadMoreButton.addEventListener('click', async function(e) {
     if(loadMoreTypeIsNewReleases) {
         await getNewReleasesWithOffset(spotifyToken, nextloadMoreLink)
         additionalAlbums.items.forEach((data) => createCard(data, newReleasesSection))
+
     } else {
         await getAlbumsByGenresWithOffset(spotifyToken, nextloadMoreLink)
         // FIND A WAY TO FILTER ADDTIONAL ALBUMS
         additionalAlbums.items.forEach((data) => createCard(data.album, newReleasesSection))
     }
-    if(nextloadMoreLink != '') {
-        showloadMoreSection()
-    } else {
-        hideloadMoreSection()
-    }
+   loadMorelink()
 })
 
 // Checks to see if album is already in library and than either adds it or makes user aware that album is already in library
@@ -124,6 +113,14 @@ function showloadMoreSection() {
 
 function hideloadMoreSection() {
     loadMoreSection.style.display = 'none'
+}
+
+function loadMorelink() {
+    if(nextloadMoreLink === '' || nextloadMoreLink === null) {
+        hideloadMoreSection()
+    } else {
+        showloadMoreSection()
+    }
 }
 
 // For testing only
