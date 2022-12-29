@@ -9,7 +9,8 @@ let testGenre = 'electronic';
 let newReleases;
 let additionalAlbums;
 let genreSearchResults;
-let nextloadMoreLink = '';
+let nextloadMoreLink = "";
+let loadMoreTypeIsNewReleases = true;
 
 // components
 const dashboardComponent = document.querySelector('.dashboard')
@@ -34,12 +35,17 @@ window.addEventListener('load', () => {
 // Search for Genres from Select Input
 inputComponent.addEventListener('change', async function(element) {
     const genreValue = element.target.value
+    loadMoreTypeIsNewReleases = false;
     hideSuccess()
-    hideloadMoreSection()
+    await getAlbumsByGenres(spotifyToken, genreValue)
+    if(nextloadMoreLink != '') {
+        showloadMoreSection()
+    } else {
+        hideloadMoreSection()
+    }
     clearNewReleasesSection()   
     showNewReleases()     
-    await getAlbumsByGenres(spotifyToken, genreValue)
-    genreSearchResults.tracks.forEach((data) => createCard(data.album, newReleasesSection))    
+    genreSearchResults.forEach((data) => createCard(data.album, newReleasesSection))    
 })
 
 // Display 50 new releases fetched from above
@@ -50,16 +56,26 @@ newReleasesButton.addEventListener('click',(e) => {
     showloadMoreSection()
     showNewReleases()
     nextloadMoreLink = newReleases.next
-    newReleases.items.forEach((data) => createCard(data, newReleasesSection))
+    // newReleases.items.forEach((data) => createCard(data, newReleasesSection))
 });
 
 // Display 50 more new releases
 
 loadMoreButton.addEventListener('click', async function(e) {
     e.preventDefault;
-    await getNewReleasesWithOffset(spotifyToken, nextloadMoreLink)
-    additionalAlbums.items.forEach((data) => createCard(data, newReleasesSection))
-    hideloadMoreSection()
+    if(loadMoreTypeIsNewReleases) {
+        await getNewReleasesWithOffset(spotifyToken, nextloadMoreLink)
+        additionalAlbums.items.forEach((data) => createCard(data, newReleasesSection))
+    } else {
+        await getAlbumsByGenresWithOffset(spotifyToken, nextloadMoreLink)
+        // FIND A WAY TO FILTER ADDTIONAL ALBUMS
+        additionalAlbums.items.forEach((data) => createCard(data.album, newReleasesSection))
+    }
+    if(nextloadMoreLink != '') {
+        showloadMoreSection()
+    } else {
+        hideloadMoreSection()
+    }
 })
 
 // Checks to see if album is already in library and than either adds it or makes user aware that album is already in library
@@ -107,13 +123,19 @@ function hideloadMoreSection() {
 }
 
 // For testing only
-// consoleButton.addEventListener('click',(e) => {
-//     e.preventDefault;
-//     getCategories(spotifyToken)
-//     getGenres(spotifyToken)
-//     // Add below code to dashboard.html
-//     // <a class="button" id="console">Console.log</a>
-// })
+consoleButton.addEventListener('click',(e) => {
+    e.preventDefault;
+    getAlbumsByGenresTwo(spotifyToken, 'hip-hop')
+
+    if(nextloadMoreLink) {
+        showloadMoreSection()
+    } else {
+        hideloadMoreSection()
+    }
+
+    // Add below code to dashboard.html
+    // <a class="button" id="console">Console.log</a>
+})
 
 
 
