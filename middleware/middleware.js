@@ -2,8 +2,8 @@ const path = require('path');
 const randomstring = require("randomstring");
 const Buffer = require('buffer/').Buffer
 const axios = require('axios');
-const redirect_uri = 'https://spotify-search.onrender.com//callback';
-// http://localhost:8888
+const redirect_uri = 'https://spotify-search.onrender.com/callback';
+// http://localhost:8888/
 // Setup backend local Storage
 
 // Set up ENV file and bring in data
