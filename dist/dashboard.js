@@ -54,9 +54,13 @@ newReleasesButton.addEventListener('click',(e) => {
     clearNewReleasesSection()
     hideSuccess()
     showloadMoreSection()
-    showNewReleases()
     nextloadMoreLink = newReleases.next
-    // newReleases.items.forEach((data) => createCard(data, newReleasesSection))
+    newReleases.items.forEach((data) => createCard(data, newReleasesSection))
+    if(nextloadMoreLink != '') {
+        showloadMoreSection()
+    } else {
+        hideloadMoreSection()
+    }
 });
 
 // Display 50 more new releases
