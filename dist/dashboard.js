@@ -27,7 +27,7 @@ const loadMoreButton = document.getElementById('load-more-button')
 // Get inital 50 albums on load and set menu Iems
 window.addEventListener('load', () => {
     // Sets newReleases variable declared above
-    getNewReleases(spotifyToken)
+    getNewReleasesTwo(spotifyToken)
     addGenresToInput(menuItems)
     hideloadMoreSection()
 })
@@ -124,19 +124,19 @@ function loadMorelink() {
 }
 
 // For testing only
-consoleButton.addEventListener('click',(e) => {
-    e.preventDefault;
-    getAlbumsByGenresTwo(spotifyToken, 'hip-hop')
+// consoleButton.addEventListener('click',(e) => {
+//     e.preventDefault;
+//     getNewReleasesTwo(spotifyToken)
 
-    if(nextloadMoreLink) {
-        showloadMoreSection()
-    } else {
-        hideloadMoreSection()
-    }
+//     if(nextloadMoreLink) {
+//         showloadMoreSection()
+//     } else {
+//         hideloadMoreSection()
+//     }
 
     // Add below code to dashboard.html
     // <a class="button" id="console">Console.log</a>
-})
+// })
 
 
 

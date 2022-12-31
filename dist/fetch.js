@@ -116,15 +116,15 @@ const getTracksByGenres = async(token, genre) => {
 
 
 // Another way to get new releases - unorganized by day, unflitered in genre. Although more results.. it lacks any oranization. 
-// const getNewReleasesTwo = async (token) => {
-//     const result = await fetch(`${spotifyURL}/search?q=tag%3Anew&type=album&limit=50`, {
-//         method: 'GET',
-//         headers: { 'Authorization': 'Bearer ' + token },
-//         });
-//     const data = await result.json();
-//     newReleases = await data.albums;
-//     return data;
-// }
+const getNewReleasesTwo = async (token) => {
+    const result = await fetch(`${spotifyURL}/search?q=tag%3Anew&type=album&limit=50`, {
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + token },
+        });
+    const data = await result.json();
+    newReleases = await data.albums;
+    nextloadMoreLink = data.albums.next   
+}
 
 // Another way to get genres - testing out which way is better
 // const getAlbumsByGenresTwo = async(token, genre) => {
