@@ -195,6 +195,14 @@ a:active {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+}
+.error > * {
+  margin-bottom: 2rem;
+}
+.error p a {
+  font-size: inherit;
+  color: white;
 }
 
 .modal {

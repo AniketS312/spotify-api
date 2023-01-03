@@ -11,6 +11,7 @@ let additionalAlbums;
 let genreSearchResults;
 let nextloadMoreLink = "";
 let loadMoreTypeIsNewReleases = true;
+let httpError;
 
 // components
 const dashboardComponent = document.querySelector('.dashboard')
@@ -27,7 +28,7 @@ const loadMoreButton = document.getElementById('load-more-button')
 // Get inital 50 albums on load and set menu Iems
 window.addEventListener('load', () => {
     // Sets newReleases variable declared above
-    getNewReleasesTwo(spotifyToken)
+    getNewReleases(spotifyToken)
     addGenresToInput(menuItems)
     hideloadMoreSection()
 })
@@ -49,6 +50,7 @@ newReleasesButton.addEventListener('click',(e) => {
     e.preventDefault; 
     clearNewReleasesSection()
     hideSuccess()
+    console.log(httpError)
     nextloadMoreLink = newReleases.next
     newReleases.items.forEach((data) => createCard(data, newReleasesSection))
     showNewReleases()

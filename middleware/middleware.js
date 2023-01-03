@@ -2,8 +2,8 @@ const path = require('path');
 const randomstring = require("randomstring");
 const Buffer = require('buffer/').Buffer
 const axios = require('axios');
-const redirect_uri = 'https://spotify-search.onrender.com/callback';
-// http://localhost:8888/
+const redirect_uri = 'http://localhost:8888/callback';
+// https://spotify-search.onrender.com/
 // Setup backend local Storage
 
 // Set up ENV file and bring in data
@@ -41,10 +41,9 @@ function spotifyRedirect (req, res) {
 
 
 // Serve page after authorizaton. Store authorization code into a cookie for front end can access token
- function redirectAfterAuth(req, res) {
+ function redirectAfterAuth(req, res, next) {
   const code = req.query.code || null;
   const state = req.query.state || null;
-
 
   const usp = new URLSearchParams({
     grant_type: 'authorization_code',
@@ -66,21 +65,30 @@ function spotifyRedirect (req, res) {
         accessToken = response.data.access_token
         res.setHeader('Set-Cookie', `spotifyToken=${response.data.access_token}`)
         res.sendFile(filePathDashboard);  
-      } else {
+      } 
+      else if (response.status === 403) {
+        res.sendFile(filePathError)
+      }
+      else {
         res.send(response);
       }
     })
     .catch(error => {
       if(error.response.status) {
-        res.redirect('/login')
+        res.sendFile(filePathError)
       } else {
         res.send(error);
       }
     });
 
     // res.sendFile(filePathDashboard)  
-  
 }
+
+// Send Error file
+function sendErrorFile(req, res) {
+  res.status(403).sendFile(filePathError)
+}
+
 
 
 // Refresh token
@@ -115,11 +123,6 @@ function refreshToken(req, res) {
     });
 };
 
-// Send Error file
-function sendErrorFile(req, res) {
-  res.statusCode = 404;
-  res.sendFile(filePathError)
-}
 
 
 
