@@ -5,11 +5,11 @@ const getNewReleases = async (token) => {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token },
         })
-        httpError = await result.json();
+        console.log(result)
         const data = await result.json();
         newReleases = await data.albums;
-        console.log(data)
-        nextloadMoreLink = data.albums.next    
+        nextloadMoreLink = data.albums.next  
+
 }
 
 // Gets new Releases - Current Spotify way

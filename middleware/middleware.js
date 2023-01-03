@@ -74,10 +74,10 @@ function spotifyRedirect (req, res) {
       }
     })
     .catch(error => {
-      if(error.response.status) {
-        res.sendFile(filePathError)
-      } else {
-        res.send(error);
+      if(error.response.status === 400) {
+        res.redirect('/login')
+      } else if (error.response.status === 403){
+        res.sendFile(filePathError);
       }
     });
 

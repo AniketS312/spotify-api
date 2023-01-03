@@ -11,7 +11,6 @@ let additionalAlbums;
 let genreSearchResults;
 let nextloadMoreLink = "";
 let loadMoreTypeIsNewReleases = true;
-let httpError;
 
 // components
 const dashboardComponent = document.querySelector('.dashboard')
@@ -50,7 +49,6 @@ newReleasesButton.addEventListener('click',(e) => {
     e.preventDefault; 
     clearNewReleasesSection()
     hideSuccess()
-    console.log(httpError)
     nextloadMoreLink = newReleases.next
     newReleases.items.forEach((data) => createCard(data, newReleasesSection))
     showNewReleases()
