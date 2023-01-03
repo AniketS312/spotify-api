@@ -5,7 +5,6 @@ const getNewReleases = async (token) => {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token },
         })
-        console.log(result)
         const data = await result.json();
         newReleases = await data.albums;
         nextloadMoreLink = data.albums.next  
@@ -45,6 +44,7 @@ const getAlbumsByGenres = async(token, genre) => {
     });
     const data = await result.json();
     genreSearchResults = data.tracks.items
+    console.log(data)
     return nextloadMoreLink = data.tracks.next    
 }
 

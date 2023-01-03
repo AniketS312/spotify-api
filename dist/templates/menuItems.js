@@ -7,6 +7,7 @@ const menuItems = [
     'drum-and-bass',
     'edm',
     'electronic',
+    'folk',
     'garage',
     'hard-rock',
     'heavy-metal',
@@ -14,11 +15,13 @@ const menuItems = [
     'house',
     'indie',
     'metal',
-    'new-release',
+    // 'new-release', - does not provide any data but also doesnt provide an error
+    'party',
+    'progressive-house',
     'rock',
     'techno',
     'trip-hop',
-    'work-out',
+    // 'work-out', - does not provide any data but also doesnt provide an error
     'world-music'
 ]
 
