@@ -84,6 +84,10 @@ a:active {
 .login a {
   margin: 2rem 0;
 }
+.login p a {
+  font-size: inherit;
+  color: white;
+}
 
 .main-nav {
   display: flex;
